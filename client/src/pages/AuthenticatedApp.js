@@ -4,8 +4,8 @@ import HomePage from "./HomePage";
 import CreatePostPage from "./CreatePostPage";
 import ViewPostPage from "./ViewPostPage";
 import EditPostPage from "./EditPostPage";
-import "../App.css";
 import NotFoundPage from "./NotFoundPage";
+import "../App.css";
 
 function AuthenticatedApp() {
   return (

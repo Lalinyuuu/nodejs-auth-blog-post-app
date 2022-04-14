@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = React.createContext();
 
@@ -9,11 +11,16 @@ function AuthProvider(props) {
     user: null,
   });
 
+  const navigate = useNavigate();
+
   // make a login request
   const login = () => {};
 
   // register the user
-  const register = () => {};
+  const register = async (data) => {
+    await axios.post("http://localhost:4000/auth/register", data);
+    navigate("/login");
+  };
 
   // clear the token in localStorage and the user data
   const logout = () => {};

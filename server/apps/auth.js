@@ -1,4 +1,5 @@
 import { Router } from "express";
+import bcrypt from "bcrypt";
 import { db } from "../utils/db.js";
 
 const authRouter = Router();
@@ -12,8 +13,14 @@ authRouter.post("/register", async (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
   };
+
+  const salt = await bcrypt.genSalt(10);
+  // now we set user password to hashed password
+  user.password = await bcrypt.hash(user.password, salt);
+
   const collection = db.collection("users");
   await collection.insertOne(user);
+
   return res.json({
     message: "User has been created successfully",
   });

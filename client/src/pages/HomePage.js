@@ -12,8 +12,6 @@ function HomePage() {
   const { posts, totalPages, getPosts, deletePost, isError, isLoading } =
     usePosts();
 
-  console.log(totalPages);
-
   useEffect(() => {
     getPosts({ status, keywords, page });
   }, [status, keywords, page]);

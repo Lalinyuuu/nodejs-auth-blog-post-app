@@ -32,7 +32,10 @@ function AuthProvider(props) {
   };
 
   // clear the token in localStorage and the user data
-  const logout = () => {};
+  const logout = () => {
+    localStorage.removeItem("token");
+    setState({ ...state, user: null });
+  };
 
   const isAuthenticated = Boolean(localStorage.getItem("token"));
 

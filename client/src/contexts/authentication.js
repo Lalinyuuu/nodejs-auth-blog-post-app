@@ -19,7 +19,6 @@ function AuthProvider(props) {
     const result = await axios.post("http://localhost:4000/auth/login", data);
     const token = result.data.token;
     localStorage.setItem("token", token);
-    navigate("/");
     const userDataFromToken = jwtDecode(token);
     setState({ ...state, user: userDataFromToken });
     navigate("/");
@@ -34,7 +33,7 @@ function AuthProvider(props) {
   // clear the token in localStorage and the user data
   const logout = () => {
     localStorage.removeItem("token");
-    setState({ ...state, user: null });
+    setState({ ...state, user: null, error: null });
   };
 
   const isAuthenticated = Boolean(localStorage.getItem("token"));

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/authentication";
 
 import usePosts from "../hooks/usePosts";
 import getPublishedDate from "../utils/getPublishedDate";
@@ -12,7 +13,7 @@ function HomePage() {
   const { posts, totalPages, getPosts, deletePost, isError, isLoading } =
     usePosts();
 
-  console.log(totalPages);
+  const { logout } = useAuth();
 
   useEffect(() => {
     getPosts({ status, keywords, page });
@@ -28,6 +29,13 @@ function HomePage() {
           }}
         >
           Create Post
+        </button>
+        <button
+          onClick={() => {
+            logout();
+          }}
+        >
+          Logout
         </button>
       </div>
       <div className="search-box-container">

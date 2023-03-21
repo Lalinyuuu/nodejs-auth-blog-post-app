@@ -1,10 +1,14 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
+import authRouter from "./apps/auth.js";
 import postRouter from "./apps/posts.js";
 import { client } from "./utils/db.js";
+import dotenv from "dotenv";
 
 async function init() {
+  dotenv.config();
+
   const app = express();
   const port = 4000;
 
@@ -12,6 +16,8 @@ async function init() {
 
   app.use(cors());
   app.use(bodyParser.json());
+
+  app.use("/auth", authRouter);
   app.use("/posts", postRouter);
 
   app.get("/", (req, res) => {
@@ -23,7 +29,7 @@ async function init() {
   });
 
   app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`Server is listening on port ${port}`);
   });
 }
 
